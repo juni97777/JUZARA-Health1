@@ -16,11 +16,12 @@ const app = express();
 const isProd = process.env.NODE_ENV === 'production';
 app.set('trust proxy', 1);
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173', credentials: true }));
+const allowedOrigins=(process.env.CLIENT_ORIGIN||'http://localhost:5173').split(',').map(v=>v.trim()).filter(Boolean);
+app.use(cors({ origin:(origin,cb)=>{ if(!origin||allowedOrigins.includes(origin)) return cb(null,true); return cb(new Error('Origin tidak diizinkan oleh CORS.')); }, credentials:true }));
 app.use(express.json({ limit: '1mb' }));
 const PgSession = connectPgSimple(session);
 const sessionPool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-app.use(session({ name: 'juzara.sid', store: new PgSession({ pool: sessionPool, tableName: 'user_sessions', createTableIfMissing: true }), secret: process.env.SESSION_SECRET || 'development-only-change-this-secret-now', resave: false, saveUninitialized: false, cookie: { httpOnly: true, secure: isProd, sameSite: 'lax', maxAge: 1000 * 60 * 60 * 8 } }));
+app.use(session({ name: 'juzara.sid', store: new PgSession({ pool: sessionPool, tableName: 'user_sessions', createTableIfMissing: true }), secret: process.env.SESSION_SECRET || 'development-only-change-this-secret-now', resave: false, saveUninitialized: false, cookie: { httpOnly: true, secure: isProd, sameSite: isProd ? 'none' : 'lax', maxAge: 1000 * 60 * 60 * 8 } }));
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, limit: 8, standardHeaders: true, legacyHeaders: false });
 
 declare module 'express-session' { interface SessionData { userId?: string; role?: Role } }

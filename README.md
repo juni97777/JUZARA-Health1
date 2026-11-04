@@ -168,3 +168,7 @@ The included Compose stack is a deployable starting point, not a public hosting 
 
 ### Readiness and limitations
 This package can be launched as a local web application with Docker after configuration. It has not been deployed to a public domain from this environment and has not passed a full build, security audit, concurrency test or clinical validation. The facility and schedule seed data are explicitly demo/unverified. Do not use real patient data or rely on it for medical decisions. Before production healthcare use, complete the remaining work listed in this README, including CSRF protection, formal Prisma migrations, facility/provider verification, cancellation/slot locking, end-to-end and authorization tests, secure attachment handling, real lab/LIS provenance, privacy/legal review and penetration testing.
+
+
+### Login dan akun dokter
+Login pasien dan dokter memakai satu formulir. Role ditentukan oleh akun di database. Akun dokter harus dibuat melalui seed backend dengan variabel lingkungan `DOCTOR_1_PASSWORD` sampai `DOCTOR_5_PASSWORD` (lihat `DEPLOYMENT.md`); tidak ada kredensial bawaan yang ditanam di source code.

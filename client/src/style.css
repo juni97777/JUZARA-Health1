@@ -98,3 +98,16 @@ button{transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
 @media(max-width:1100px){.auth-mascot{right:8%;bottom:28%;font-size:82px}.auth-hospital{right:5%;width:160px;height:116px}.auth-copy{max-width:60%}}
 @media(max-width:900px){.auth-mascot{right:10%;bottom:24%;font-size:78px}.auth-hospital{right:6%;bottom:12%;width:145px;height:105px}}
 @media(max-width:520px){.auth-mascot{right:5%;bottom:16%;font-size:65px}.auth-hospital{right:4%;bottom:9%;width:125px;height:90px}.auth-panel-inner{padding-left:2px;padding-right:2px}}
+
+
+/* Final auth layout correction: keep the original tiger mascot, centered on its sun badge. */
+.auth-page{width:100%;min-width:0;overflow-x:hidden;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)}
+.auth-scene,.auth-panel{min-width:0}
+.auth-copy{width:100%;max-width:470px;margin-top:-34px}
+.auth-copy h1{max-width:100%;overflow-wrap:normal}
+.auth-sun{width:clamp(190px,27vw,300px);height:clamp(190px,27vw,300px);right:9%;top:24%;opacity:.72}
+.auth-mascot{right:calc(9% + clamp(58px,8vw,92px));left:auto;top:30%;bottom:auto;font-size:clamp(76px,8vw,112px);line-height:1;transform:rotate(-3deg);z-index:4}
+.auth-mascot span{right:-5px;top:2px}
+.auth-hospital{right:8%;bottom:13%;width:190px;height:128px;z-index:2}
+@media(max-width:1100px) and (min-width:901px){.auth-scene{padding:40px 34px}.auth-copy{max-width:58%}.auth-copy h1{font-size:clamp(36px,4.5vw,52px)}.auth-mascot{right:15%;top:31%;font-size:82px}.auth-sun{right:7%;top:24%;width:210px;height:210px}.auth-hospital{right:5%;width:155px;height:108px}}
+@media(max-width:900px){.auth-page{grid-template-columns:1fr}.auth-scene{display:none}}
