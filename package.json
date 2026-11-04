@@ -1,0 +1,21 @@
+{
+  "name": "juzara-health",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm:dev -w server\" \"npm:dev -w client\"",
+    "build": "npm run build -w client && npm run build -w server",
+    "db:generate": "npm run db:generate -w server",
+    "db:migrate": "npm run db:migrate -w server",
+    "db:seed": "npm run db:seed -w server",
+    "start": "npm run start -w server",
+    "db:push": "npm run db:push -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
